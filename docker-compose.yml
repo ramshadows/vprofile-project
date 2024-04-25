@@ -3,21 +3,21 @@ services:
   vprodb:
     build: 
       context: ./Docker-files/db
-    image: vprocontainers/vprofiledb
-    container_name: vprodb
+    image: ramshadows/vprofile-app-db
+    container_name: vprodb01
     ports:
       - "3306:3306"
     volumes:
       - vprodbdata:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=vprodbpass
+      - MYSQL_ROOT_PASSWORD=admin123
 
-  vprocache01:
+  vpromc01:
     image: memcached
     ports:
       - "11211:11211"
 
-  vpromq01:
+  vprormq01:
     image: rabbitmq
     ports:
       - "15672:15672"
@@ -28,7 +28,7 @@ services:
   vproapp:
     build: 
       context: ./Docker-files/app
-    image: vprocontainers/vprofileapp
+    image: ramshadows/vprofile-app
     container_name: vproapp
     ports:
       - "8080:8080"
@@ -38,7 +38,7 @@ services:
   vproweb:
     build: 
       context: ./Docker-files/web
-    image: vprocontainers/vprofileweb
+    image: ramshadows/vprofile-web
     container_name: vproweb
     ports:
       - "80:80"
